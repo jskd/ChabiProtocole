@@ -73,4 +73,15 @@ Detruire une annonce
 Le client envoie un [DESTROY id\_annonce]
 Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
+\section{Format des messages}
+
+219 DB  U+2588  █   full block
+
+[CHABI-ANNO█id-annonceur█type█titre█description█prix]
+
+[CHABI-LIST][CHABI-ANNO][CHABI-ANNO][...][CHABI-ANNO][END-CHABI-LIST]
+
+[CHABI-MESS$~id-dest~id-src~id-annon~message]
+
+
 \end{document}
