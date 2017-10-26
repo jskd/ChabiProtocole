@@ -24,16 +24,53 @@ Architecture client/serveur
 Serveur:
 Stoque les annonces reçues
 Envoie les annonces non obsoletes des clients connectés au serveur
-A la
+
+
+
 
 
 
 Client:
 Choisi une des petites annonces proposées par le serveur
-Entre en communication directe avec l'annonceur
+(Entre en communication directe avec l'annonceur)
+
 Connexion avec le serveur avec [BonjourChabi]
 
 
+Conexion
 
+Client qui se connect au serveur
+
+Le serveur ajoute le client dans une liste et lui attribu un ID.
+
+Deconnexion
+
+Le client envoie un [QUIT] ou est déconnecté suite à un timeout.
+
+Toute les annonce du client devienne obsoletes (et donc supprimé)
+
+
+Poster un annonce
+
+Un client peux créer une annonce en envoyant un
+
+[ANN id\_client titre prix type description]
+
+le serveur répond
+
+[CHABI id\_annonce]
+
+
+Messagerie
+
+Pour envoyer un message vers un client annonceur, il faut envoyer un
+[MES id\_client message]
+
+ au serveur. Le serveur s'occupera de transmetre le message à l'annonceur.
+
+Detruire une annonce
+
+Le client envoie un [DESTROY id\_annonce]
+Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
 \end{document}
