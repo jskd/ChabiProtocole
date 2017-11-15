@@ -16,13 +16,6 @@
 \begin{document}
 \fontfamily{cmr}
 \maketitle
-\section{Architecture}
-
-\textbf{ATTENTION : Dans tout ce qui suit, le mot ``client'' est utilisé au sens de
-client TCP, la distinction entre annonceur et utilisateur n'est pas faite.
-La distinction peut si besoin être faite avec ``Client annonceur''}
-\newline
-
 
 \section{Adresse IP et port}
 
@@ -33,84 +26,9 @@ La distinction peut si besoin être faite avec ``Client annonceur''}
 \end{itemize}
 
 
-
-
-
-
-Architecture client/serveur
-
-Serveur:
-Stoque les annonces reçues
-Envoie les annonces non obsoletes des clients connectés au serveur
-
-
-
-
-
-
-Client:
-Choisi une des petites annonces proposées par le serveur
-(Entre en communication directe avec l'annonceur)
-
-Connexion avec le serveur avec [BonjourChabi]
-
-
-Conexion
-
-Client qui se connect au serveur
-
-Le serveur ajoute le client dans une liste et lui attribu un ID.
-
-Deconnexion
-
-Le client envoie un [QUIT] ou est déconnecté suite à un timeout.
-
-Toute les annonce du client devienne obsoletes (et donc supprimé)
-
-
-Poster un annonce
-
-Un client peux créer une annonce en envoyant un
-
-[ANN id\_client titre prix type description]
-
-le serveur répond
-
-[CHABI id\_annonce]
-
-
-Messagerie
-
-Pour envoyer un message vers un client annonceur, il faut envoyer un
-[MES id\_client message]
-
- au serveur. Le serveur s'occupera de transmetre le message à l'annonceur.
-
-Detruire une annonce
-
-Le client envoie un [DESTROY id\_annonce]
-Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
-
-
-
-
-
-
-\section{Diagramme de connexion au serveur}
-
-\includegraphics[width=\textwidth]{rendu1/Protocole_Connection.png}
-
-\section{Diagramme des opérations}
-
-\includegraphics[width=\textwidth]{rendu1/Protocole_Operations.png}
-
-
 \section{Format des messages}
 
 Les messages sont tous encadrée de braquet "[" et "]".
-
-
-
 
 Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
 
@@ -131,8 +49,6 @@ Ces arguments seront:
   \item~12.10
 \end{itemize}
 
-
-
 \section{Liste des messages}
 
 \begin{itemize}
@@ -140,16 +56,31 @@ Ces arguments seront:
   \item~[NEWC] Requête nouveau client
   \item~[ACKC] Aquitement de nouveau client
   \item~[BYE]  Déconnexion d'un client
-  \item~[ANNO\textasciitilde{}\textbar{}annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
+  \item~[ANNO\#\#annonce~id\#\#src~annonce\#\#titre~annonce\#\#contenu~annonce\#\#prix]
   \begin{itemize}
-    \item id\_annonce : <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
-    \item id\_src: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
+    \item id\_annonce: <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
+    \item src\_annonce: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
     \item annonce\_titre : <string> titre
     \item annonce\_contenu : <string> contenu
     \item annonce\_prix : <double> prix
   \end{itemize}
   \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST]
-  \item~[MESS id\_src id\_dst client\_message]
+  \item~[MESS\#\#id\_src\#\#id\_dst\#\#client\_message]
+  \begin{itemize}
+    \item id\_src: <int> id unique du client source 
+    \item id\_dst: <int> id unique du client destinataire
+    \item client\_message : <string> message
+  \end{itemize}
 \end{itemize}
+
+
+\section{Diagramme de connexion au serveur}
+
+\includegraphics[width=\textwidth]{rendu1/Protocole_Connection.png}
+
+\section{Diagramme des opérations}
+
+\includegraphics[width=\textwidth]{rendu1/Protocole_Operations.png}
+
 
 \end{document}
