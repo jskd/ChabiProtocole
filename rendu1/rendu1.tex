@@ -17,10 +17,25 @@
 \fontfamily{cmr}
 \maketitle
 \section{Architecture}
+
 \textbf{ATTENTION : Dans tout ce qui suit, le mot ``client'' est utilisé au sens de
 client TCP, la distinction entre annonceur et utilisateur n'est pas faite.
 La distinction peut si besoin être faite avec ``Client annonceur''}
 \newline
+
+
+\section{Adresse IP et port}
+
+\begin{itemize}
+  \item~Le port TCP utilisé est le 1027
+  \item~IP UDP Multicast: 224.4.4.4
+  \item~Port UDP Multicast : 4444
+\end{itemize}
+
+
+
+
+
 
 Architecture client/serveur
 
@@ -77,6 +92,10 @@ Le client envoie un [DESTROY id\_annonce]
 Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
 
+
+
+
+
 \section{Diagramme de connexion au serveur}
 
 \includegraphics[width=\textwidth]{rendu1/Protocole_Connection.png}
@@ -86,14 +105,20 @@ Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 \includegraphics[width=\textwidth]{rendu1/Protocole_Operations.png}
 
 
-
-
 \section{Format des messages}
+
+Les messages sont tous encadrée de braquet "[" et "]".
+
+Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ils sont conventionnelement ecrit en majuscule.
+
+Certain message contienne des arguments. Chacun de ces arguments sont séparé par des espaces, s'ils contiennent des espace il doit être
+entouré de double quôte. (Fonctionnement similaire aux argv)
+
 \begin{itemize}
-  \item~[WELC] Message de bienvenue lors de la connexion
-  \item~[NEWC]
-  \item~[ACKC]
-  \item~[BYE]
+  \item~[WELC] Message de bienvenue lors de la connexion d'un client via TCP
+  \item~[NEWC] Requête nouveau client
+  \item~[ACKC] Aquitement de nouveau client
+  \item~[BYE]  Déconnexion d'un client
   \item~[ANNO~id\_annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
   \begin{itemize}
     \item id\_annonce : <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
@@ -104,5 +129,6 @@ Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
   \end{itemize}
   \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST]
   \item~[MESS id\_src id\_dst client\_message]
-  \end{itemize}
+\end{itemize}
+
 \end{document}
