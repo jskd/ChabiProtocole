@@ -26,9 +26,40 @@
 \end{itemize}
 
 
+\section{Fonctionnement}
+
+\subsection{Connexion}
+
+La connexion au serveur d'annonce s'effecture en TCP sur le port 1027.
+
+Après la connexion TCP, le serveur envois au client un message de type [WELC].
+
+Le client doit alors s'enregistrer en envoyant la commande [NEWC]
+
+Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+
+
+\subsection{Ajout d'annonce}
+
+Un client enregistré peut ajouter une annonce en envoyant un [ANNO\#\#annonce\_id\#\#src\_annonce\#\#titre\_annonce\#\#contenu\_annonce\#\#prix] avec les argument annonce\_id et src\_annonce à 0 au serveur.
+
+
+\subsection{Récupération des annonces}
+
+Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+
+
+\subsection{Suppression d'annonces}
+
+Un client enregistré peut supprimé une annonce en envoyant [DELETE\#\#id\_annonce]
+
+
+\subsection{Déconnexion}
+
+Un client enregistré peut se déconnecter en envoyant [BYE] au serveur, ces annonce devienne alors obsolete.
+
 \section{Format des messages}
 
-Les messages sont tous encadrée de braquet "[" et "]".
 
 Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
 
@@ -56,7 +87,7 @@ Ces arguments seront:
   \item~[NEWC] Requête nouveau client
   \item~[ACKC] Aquitement de nouveau client
   \item~[BYE]  Déconnexion d'un client
-  \item~[ANNO\#\#annonce~id\#\#src~annonce\#\#titre~annonce\#\#contenu~annonce\#\#prix]
+  \item~[ANNO\#\#annonce\_id\#\#src\_annonce\#\#titre\_annonce\#\#contenu\_annonce\#\#prix]
   \begin{itemize}
     \item id\_annonce: <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
     \item src\_annonce: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
@@ -64,13 +95,15 @@ Ces arguments seront:
     \item annonce\_contenu : <string> contenu
     \item annonce\_prix : <double> prix
   \end{itemize}
-  \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+  \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST] : Message contenant les annonces actuellement enregistré
+  \item~[LIST] : Requête de liste d'annonce d'un client
   \item~[MESS\#\#id\_src\#\#id\_dst\#\#client\_message]
   \begin{itemize}
     \item id\_src: <int> id unique du client source 
     \item id\_dst: <int> id unique du client destinataire
     \item client\_message : <string> message
   \end{itemize}
+  \item~[DELETE\#\#id\_annonce] : Reuqête de suppresion d'annonce d'un client
 \end{itemize}
 
 
