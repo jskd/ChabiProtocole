@@ -77,16 +77,15 @@ Le client envoie un [DESTROY id\_annonce]
 Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
 \section{Format des messages}
-fgddfgdgf
 \begin{itemize}
-  \item~[WELC]
+  \item~[WELC] Message de bienvenue lors de la connexion
   \item~[NEWC]
   \item~[ACKC]
   \item~[BYE]
-	\item~[ANNO~id\_annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
+  \item~[ANNO~id\_annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
   \begin{itemize}
-	  \item id\_annonce : <int>  id unique de l'annonce (à 0 si on créer une annonce)
-    \item id\_src: <int> id unique de l'annonceur
+    \item id\_annonce : <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
+    \item id\_src: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
     \item annonce\_titre : <string> titre
     \item annonce\_contenu : <string> contenu
     \item annonce\_prix : <double> prix
