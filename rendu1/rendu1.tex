@@ -48,6 +48,13 @@ Un client enregistré peut ajouter une annonce en envoyant un [ANNO\#\#annonce\_
 
 Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST][ANNO][ANNO]...[ANNO][ENDLIST]
 
+\subsection{Répondre à une annonce}
+
+Un client enregistré peut repondre à une annonce en envoyant un message [MESS\#\#id\_src\#\#id\_dst\#\#client\_message] à l'annonceur.
+
+L'annonceur peux repondre en utilisant le même message en inversant id\_src et id\_dst.
+
+
 
 \subsection{Suppression d'annonces}
 
