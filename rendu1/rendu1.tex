@@ -109,17 +109,38 @@ Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
 Les messages sont tous encadrée de braquet "[" et "]".
 
-Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ils sont conventionnelement ecrit en majuscule.
 
-Certain message contienne des arguments. Chacun de ces arguments sont séparé par des espaces, s'ils contiennent des espace il doit être
-entouré de double quôte. (Fonctionnement similaire aux argv)
+
+
+Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
+
+Certain message contienne des arguments. Chacun de ces arguments sont séparé par deux \# (ASCII 35), 
+il est interdit à un argument de contenir deux \# à la suite.
+
+Exemple: 
+
+[ANNO\#\#451\#\#124\#\#salade\#\#Une belle salade toute verte!\#\#12.10] 
+
+Sera un message avec le prefix "ANNO"
+Ces arguments seront:
+\begin{itemize}
+  \item~451
+  \item~124
+  \item~salade
+  \item~"Une belle salade toute verte!"
+  \item~12.10
+\end{itemize}
+
+
+
+\section{Liste des messages}
 
 \begin{itemize}
   \item~[WELC] Message de bienvenue lors de la connexion d'un client via TCP
   \item~[NEWC] Requête nouveau client
   \item~[ACKC] Aquitement de nouveau client
   \item~[BYE]  Déconnexion d'un client
-  \item~[ANNO~id\_annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
+  \item~[ANNO\textasciitilde{}\textbar{}annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
   \begin{itemize}
     \item id\_annonce : <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
     \item id\_src: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
