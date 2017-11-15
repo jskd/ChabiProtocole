@@ -2,7 +2,6 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[francais]{babel}
 \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
 \usepackage{url}
 
@@ -18,7 +17,9 @@
 \fontfamily{cmr}
 \maketitle
 \section{Architecture}
-\textbf{ATTENTION : Dans tout ce qui suit, le mot ``client'' est utilisé au sens de client TCP, la distinction entre annonceur et utilisateur n'est pas faite. La distinction peut si besoin être faite avec ``Client annonceur''}
+\textbf{ATTENTION : Dans tout ce qui suit, le mot ``client'' est utilisé au sens de
+client TCP, la distinction entre annonceur et utilisateur n'est pas faite.
+La distinction peut si besoin être faite avec ``Client annonceur''}
 \newline
 
 Architecture client/serveur
@@ -76,14 +77,21 @@ Le client envoie un [DESTROY id\_annonce]
 Si l'id client et l'id\_annonce correspondent alors l'annonce est supprimé.
 
 \section{Format des messages}
-
-219 DB  U+2588  █   full block
-
-[CHABI-ANNO█id-annonceur█type█titre█description█prix]
-
-[CHABI-LIST][CHABI-ANNO][CHABI-ANNO][...][CHABI-ANNO][END-CHABI-LIST]
-
-[CHABI-MESS$~id-dest~id-src~id-annon~message]
-
-
+fgddfgdgf
+\begin{itemize}
+  \item~[WELC]
+  \item~[NEWC]
+  \item~[ACKC]
+  \item~[BYE]
+	\item~[ANNO~id\_annonce~id\_src~annonce\_titre~annonce\_contenu~annonce\_prix]
+  \begin{itemize}
+	  \item id\_annonce : <int>  id unique de l'annonce (à 0 si on créer une annonce)
+    \item id\_src: <int> id unique de l'annonceur
+    \item annonce\_titre : <string> titre
+    \item annonce\_contenu : <string> contenu
+    \item annonce\_prix : <double> prix
+  \end{itemize}
+  \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+  \item~[MESS id\_src id\_dst client\_message]
+  \end{itemize}
 \end{document}
