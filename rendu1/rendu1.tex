@@ -36,7 +36,7 @@ Après la connexion TCP, le serveur envois au client un message de type [WELC].
 
 Le client doit alors s'enregistrer en envoyant la commande [NEWC]
 
-Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST\#\#n\_annonce][ANNO][ANNO]...[ANNO]
 
 
 \subsection{Ajout d'annonce}
@@ -46,7 +46,7 @@ Un client enregistré peut ajouter une annonce en envoyant un [ANNO\#\#annonce\_
 
 \subsection{Récupération des annonces}
 
-Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST][ANNO][ANNO]...[ANNO][ENDLIST]
+Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST\#\#n\_annonce][ANNO][ANNO]...[ANNO]
 
 \subsection{Répondre à une annonce}
 
@@ -68,14 +68,16 @@ Un client enregistré peut se déconnecter en envoyant [BYE] au serveur, ces ann
 \section{Format des messages}
 
 
-Le premier mot à l'interrieur des braquets est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
+Le premier mot d'un message est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
 
-Certain message contienne des arguments. Chacun de ces arguments sont séparé par deux \# (ASCII 35), 
+Exemple: "ANNO, LIST, BYE" sont des préfix
+
+Certain message contienne des arguments. Chacun de ces arguments sont séparé par deux \# (ASCII 35),
 il est interdit à un argument de contenir deux \# à la suite.
 
-Exemple: 
+Exemple:
 
-[ANNO\#\#451\#\#124\#\#salade\#\#Une belle salade toute verte!\#\#12.10] 
+[ANNO\#\#451\#\#124\#\#salade\#\#Une belle salade toute verte!\#\#12.10]
 
 Sera un message avec le prefix "ANNO"
 Ces arguments seront:
@@ -102,11 +104,13 @@ Ces arguments seront:
     \item annonce\_contenu : <string> contenu
     \item annonce\_prix : <double> prix
   \end{itemize}
-  \item~[LIST][ANNO][ANNO]...[ANNO][ENDLIST] : Message contenant les annonces actuellement enregistré
-  \item~[LIST] : Requête de liste d'annonce d'un client
+  \item~[LIST n\_annonce] : Requête de liste d'annonce d'un client
+  \begin{itemize}
+    \item n\_annonce: <int> nombre d'annonce
+  \end{itemize}
   \item~[MESS\#\#id\_src\#\#id\_dst\#\#client\_message]
   \begin{itemize}
-    \item id\_src: <int> id unique du client source 
+    \item id\_src: <int> id unique du client source
     \item id\_dst: <int> id unique du client destinataire
     \item client\_message : <string> message
   \end{itemize}
