@@ -17,6 +17,8 @@
 \fontfamily{cmr}
 \maketitle
 
+\newcommand{\separator}{\#}
+
 \section{Adresse IP et port}
 
 \begin{itemize}
@@ -36,21 +38,21 @@ Après la connexion TCP, le serveur envois au client un message de type [WELC].
 
 Le client doit alors s'enregistrer en envoyant la commande [NEWC]
 
-Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST\#\#n\_annonce][ANNO][ANNO]...[ANNO]
+Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST\separator{}n\_annonce][ANNO][ANNO]...[ANNO]
 
 
 \subsection{Ajout d'annonce}
 
-Un client enregistré peut ajouter une annonce en envoyant un [ANNO\#\#annonce\_id\#\#src\_annonce\#\#titre\_annonce\#\#contenu\_annonce\#\#prix] avec les argument annonce\_id et src\_annonce à 0 au serveur.
+Un client enregistré peut ajouter une annonce en envoyant un [ANNO\separator{}annonce\_id\separator{}src\_annonce\separator{}titre\_annonce\separator{}contenu\_annonce\separator{}prix] avec les argument annonce\_id et src\_annonce à 0 au serveur.
 
 
 \subsection{Récupération des annonces}
 
-Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST\#\#n\_annonce][ANNO][ANNO]...[ANNO]
+Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST\separator{}n\_annonce][ANNO][ANNO]...[ANNO]
 
 \subsection{Répondre à une annonce}
 
-Un client enregistré peut repondre à une annonce en envoyant un message [MESS\#\#id\_src\#\#id\_dst\#\#client\_message] à l'annonceur.
+Un client enregistré peut repondre à une annonce en envoyant un message [MESS\separator{}id\_src\separator{}id\_dst\separator{}client\_message] à l'annonceur.
 
 L'annonceur peux repondre en utilisant le même message en inversant id\_src et id\_dst.
 
@@ -58,7 +60,7 @@ L'annonceur peux repondre en utilisant le même message en inversant id\_src et 
 
 \subsection{Suppression d'annonces}
 
-Un client enregistré peut supprimé une annonce en envoyant [DELETE\#\#id\_annonce]
+Un client enregistré peut supprimé une annonce en envoyant [DELETE\separator{}id\_annonce]
 
 
 \subsection{Déconnexion}
@@ -72,12 +74,12 @@ Le premier mot d'un message est un préfix indiquant le type de message, ces pr�
 
 Exemple: "ANNO, LIST, BYE" sont des préfix
 
-Certain message contienne des arguments. Chacun de ces arguments sont séparé par deux \# (ASCII 35),
-il est interdit à un argument de contenir deux \# à la suite.
+Certain message contienne des arguments. Chacun de ces arguments sont séparé par deux \separator{} (ASCII 35),
+il est interdit à un argument de contenir deux \separator{} à la suite.
 
 Exemple:
 
-[ANNO\#\#451\#\#124\#\#salade\#\#Une belle salade toute verte!\#\#12.10]
+[ANNO\separator{}451\separator{}124\separator{}salade\separator{}Une belle salade toute verte!\separator{}12.10]
 
 Sera un message avec le prefix "ANNO"
 Ces arguments seront:
@@ -92,11 +94,8 @@ Ces arguments seront:
 \section{Liste des messages}
 
 \begin{itemize}
-  \item~[WELC] Message de bienvenue lors de la connexion d'un client via TCP
-  \item~[NEWC] Requête nouveau client
-  \item~[ACKC] Aquitement de nouveau client
   \item~[BYE]  Déconnexion d'un client
-  \item~[ANNO\#\#annonce\_id\#\#src\_annonce\#\#titre\_annonce\#\#contenu\_annonce\#\#prix]
+  \item~[ANNO\separator{}annonce\_id\separator{}src\_annonce\separator{}titre\_annonce\separator{}contenu\_annonce\separator{}prix]
   \begin{itemize}
     \item id\_annonce: <int>  id unique de l'annonce (à 0 s'il s'agit d'une création d'annonce)
     \item src\_annonce: <int> id unique de l'annonceur (à 0 s'il s'agit d'une création d'annonce)
@@ -108,13 +107,13 @@ Ces arguments seront:
   \begin{itemize}
     \item n\_annonce: <int> nombre d'annonce
   \end{itemize}
-  \item~[MESS\#\#id\_src\#\#id\_dst\#\#client\_message]
+  \item~[MESS\separator{}id\_src\separator{}id\_dst\separator{}client\_message]
   \begin{itemize}
     \item id\_src: <int> id unique du client source
     \item id\_dst: <int> id unique du client destinataire
     \item client\_message : <string> message
   \end{itemize}
-  \item~[DELETE\#\#id\_annonce] : Reuqête de suppresion d'annonce d'un client
+  \item~[DELETE\separator{}id\_annonce] : Reuqête de suppresion d'annonce d'un client
 \end{itemize}
 
 
