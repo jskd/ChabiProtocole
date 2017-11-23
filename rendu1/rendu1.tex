@@ -34,16 +34,15 @@
 
 La connexion au serveur d'annonce s'effecture en TCP sur le port 1027.
 
-Après la connexion TCP, le serveur envois au client un message de type [WELC].
+Après la connexion TCP, le serveur envois au client un message de type [LIST\separator{}n\_annonce].
 
-Le client doit alors s'enregistrer en envoyant la commande [NEWC]
-
-Si l'opperation d'enregistrement du client s'est bien effectué alors le serveur renvois un [ACKC] au client et de la liste des annonces disponible [LIST\separator{}n\_annonce][ANNO][ANNO]...[ANNO]
-
+Le serveur envoi ensuite la liste des annonces disponible [ANNO][ANNO]...[ANNO]
 
 \subsection{Ajout d'annonce}
 
-Un client enregistré peut ajouter une annonce en envoyant un [ANNO\separator{}annonce\_id\separator{}src\_annonce\separator{}titre\_annonce\separator{}contenu\_annonce\separator{}prix] avec les argument annonce\_id et src\_annonce à 0 au serveur.
+Un client enregistré peut ajouter une annonce en envoyant un \newline
+[ANNO\separator{}annonce\_id\separator{}src\_annonce\separator{}titre\_annonce\separator{}contenu\_annonce\separator{}prix] \newline 
+avec les argument annonce\_id et src\_annonce à 0 au serveur.
 
 
 \subsection{Récupération des annonces}
@@ -52,7 +51,8 @@ Un client enregistré peut récuprer les annonce en envoyant un message [LIST] a
 
 \subsection{Répondre à une annonce}
 
-Un client enregistré peut repondre à une annonce en envoyant un message [MESS\separator{}id\_src\separator{}id\_dst\separator{}client\_message] à l'annonceur.
+Un client enregistré peut repondre à une annonce en envoyant un message \newline
+[MESS\separator{}id\_src\separator{}id\_dst\separator{}client\_message] à l'annonceur.
 
 L'annonceur peux repondre en utilisant le même message en inversant id\_src et id\_dst.
 
