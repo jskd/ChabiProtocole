@@ -44,11 +44,6 @@ Un client enregistré peut ajouter une annonce en envoyant un \newline
 [ANNO\separator{}annonce\_id\separator{}src\_annonce\separator{}titre\_annonce\separator{}contenu\_annonce\separator{}prix] \newline 
 avec les argument annonce\_id et src\_annonce à 0 au serveur.
 
-
-\subsection{Récupération des annonces}
-
-Un client enregistré peut récuprer les annonce en envoyant un message [LIST] au serveur, le serveur répond avec un [LIST\separator{}n\_annonce][ANNO][ANNO]...[ANNO]
-
 \subsection{Répondre à une annonce}
 
 Un client enregistré peut repondre à une annonce en envoyant un message \newline
@@ -66,9 +61,9 @@ Un client enregistré peut supprimé une annonce en envoyant [DELETE\separator{}
 \subsection{Déconnexion}
 
 Un client enregistré peut se déconnecter en envoyant [BYE] au serveur, ces annonce devienne alors obsolete.
+Le serveur envois donc une nouvelle liste complète des annnonces. Le premier message est [LIST\separator{}nb\_annonces] suivis des annonces. (Attention il faut donc que le client vide sa liste d'annonce quand il reçoit LIST, pour éviter les doublons.)
 
 \section{Format des messages}
-
 
 Le premier mot d'un message est un préfix indiquant le type de message, ces préfix sont conventionnelement écrient en majuscule.
 
